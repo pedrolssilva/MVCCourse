@@ -29,7 +29,7 @@ namespace APICourse.Controllers
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public virtual async Task<ActionResult<Category>> GetCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
 
@@ -51,7 +51,7 @@ namespace APICourse.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
+            _context.SetModified(category);
 
             try
             {
